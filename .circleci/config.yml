@@ -1,0 +1,22 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+    - image: docker:latest
+    steps:
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - checkout
+    - run:
+        name: Docker Login
+        command: docker login -u=ixai -p="${DOCKER_PASSWORD}"
+    - run:
+        name: Docker Build
+        command: |
+          export VERSIONS="latest 3.6 3.6.4 3.5 3.5.5"
+          for VERSION in ${VERSIONS}; do
+            export TAG="ixai/pipenv:${VERSION}"
+            docker build . --build-arg PYTHON="${VERSION}" -t "${TAG}"
+            docker push "${TAG}"
+          done
