@@ -1,3 +1,3 @@
 ARG PYTHON=latest
 FROM python:$PYTHON
-RUN pip install pipenv
+RUN pip install -U pip pipenv
