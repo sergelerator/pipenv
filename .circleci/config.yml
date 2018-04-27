@@ -10,7 +10,8 @@ jobs:
     - checkout
     - run:
         name: Docker Login
-        command: docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
+        command: |
+          echo -n "${DOCKER_PASSWORD}" | docker login -u="${DOCKER_USERNAME}" --password-stdin
     - run:
         name: Docker Build
         command: |
