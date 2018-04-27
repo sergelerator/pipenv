@@ -10,7 +10,7 @@ jobs:
     - checkout
     - run:
         name: Docker Login
-        command: docker login -u=ixai -p="${DOCKER_PASSWORD}"
+        command: docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
     - run:
         name: Docker Build
         command: |
